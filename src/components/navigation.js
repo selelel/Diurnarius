@@ -20,17 +20,20 @@ function Nav() {
     });
   };
   return (
-    <nav className=" flex gap-3 text-white bg-black justify-center">
-      <Link to={"/"}>Home</Link>
-      <Link to={"/profile"}>Profile</Link>
-      {state.isAuth ? (
-        <>
-          <Link to={"/create"}>CreateBlog</Link>
-          <button onClick={clickHandler}>Log Out</button>
-        </>
-      ) : (
-        <Link to={"/login"}>LogIn</Link>
-      )}
+    <nav className="flex justify-between text-2xl items-baseline ">
+      <h1 className="font-bold text-5xl">Diurnarius</h1>
+      <div className="flex gap-5 text-lg    h-fit">
+        <Link to={"/"}>Blogs</Link>
+        <Link to={"/profile"}>Profile</Link>
+        {state.isAuth ? (
+          <>
+            <Link to={"/create"}>CreateBlog</Link>
+            <div onClick={clickHandler}>Log Out</div>
+          </>
+        ) : (
+          <Link to={"/login"}>LogIn</Link>
+        )}
+      </div>
     </nav>
   );
 }

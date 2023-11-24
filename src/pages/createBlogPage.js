@@ -27,17 +27,17 @@ function CreateBlog() {
 
   const TitleHandler = (e) => {
     dispatch({
-      type: CONTENTS_,
+      type: TITLE_,
       payload: e.target.value,
     });
   };
 
   const DescHandler = (e) => {
-    dispatch({ type: TITLE_, payload: e.target.value });
+    dispatch({ type: DESCRIPTION_, payload: e.target.value });
   };
 
   const ContentHandler = (e) => {
-    dispatch({ type: DESCRIPTION_, payload: e.target.value });
+    dispatch({ type: CONTENTS_, payload: e.target.value });
   };
 
   useEffect(() => {
