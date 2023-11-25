@@ -9,17 +9,20 @@ function CreateBlog() {
   const { state, dispatch, name } = Context();
   const { CONTENTS_, TITLE_, DESCRIPTION_ } = name;
   const blogCollection = collection(db, "contents");
-
-  console.log(state);
   const createBlog = async () => {
     await addDoc(blogCollection, {
       title: state.Title,
       desc: state.Description,
       content: state.Content,
+      posted: new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(new Date()),
       author: {
         name: auth.currentUser.displayName,
         id: auth.currentUser.uid,
-        pic: auth.currentUser.photoURL,
       },
     });
     navigate("/");

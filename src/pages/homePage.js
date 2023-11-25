@@ -1,11 +1,13 @@
 import { getDocs, collection } from "firebase/firestore";
 import React from "react";
-import { db } from "../utils/firebase-utils";
+import { auth, db } from "../utils/firebase-utils";
 import { useEffect } from "react";
 import { Context } from "../utils/context";
 import { Fragment } from "react";
 import Panel from "../components/panel";
 import ArticlePanel from "../components/articlePanel";
+import Profile from "../components/profile";
+import { Link } from "react-router-dom";
 
 function Home() {
   const blogCollection = collection(db, "contents");
@@ -25,23 +27,24 @@ function Home() {
     getPost();
   }, []);
 
-  console.log(state.ArrayDB);
   return (
     <div className="grid grid-cols-7 mt-5 gap-2">
       {/*First Section*/}
       <div className="col-span-5">
         <h1 className="text-2xl font-semibold">Blogs</h1>
-        {state.ArrayDB.map((e) => {
+        {state.ArrayDB.map((e, i) => {
           return (
             <Fragment key={e.id}>
-              <ArticlePanel title={e.title} desc={e.desc} />
+              <Link to={`/${i}`}>
+                <ArticlePanel title={e.title} desc={e.desc} />
+              </Link>
             </Fragment>
           );
         })}
       </div>
       {/*Second Section*/}
       <div className="col-span-2">
-        <h1>Hello</h1>
+        <Profile />
       </div>
     </div>
   );

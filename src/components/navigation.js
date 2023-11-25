@@ -21,14 +21,15 @@ function Nav() {
   };
   return (
     <nav className="flex justify-between text-2xl items-baseline ">
-      <h1 className="font-bold text-5xl">Diurnarius</h1>
+      <h1 className="font-bold text-5xl font-sans">Diurnarius</h1>
       <div className="flex gap-5 text-lg    h-fit">
         <Link to={"/"}>Blogs</Link>
-        <Link to={"/profile"}>Profile</Link>
         {state.isAuth ? (
           <>
             <Link to={"/create"}>CreateBlog</Link>
-            <div onClick={clickHandler}>Log Out</div>
+            <div classname="cursor-pointer" onClick={clickHandler}>
+              Log Out
+            </div>
           </>
         ) : (
           <Link to={"/login"}>LogIn</Link>
