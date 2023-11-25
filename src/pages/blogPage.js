@@ -1,10 +1,9 @@
 import { getDocs, collection } from "firebase/firestore";
 import React from "react";
-import { auth, db } from "../utils/firebase-utils";
+import { db } from "../utils/firebase-utils";
 import { useEffect } from "react";
 import { Context } from "../utils/context";
 import { Fragment } from "react";
-import Panel from "../components/panel";
 import ArticlePanel from "../components/articlePanel";
 import Profile from "../components/profile";
 import { Link } from "react-router-dom";

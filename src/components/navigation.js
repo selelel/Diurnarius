@@ -27,7 +27,7 @@ function Nav() {
         {state.isAuth ? (
           <>
             <Link to={"/create"}>CreateBlog</Link>
-            <div classname="cursor-pointer" onClick={clickHandler}>
+            <div className="cursor-pointer" onClick={clickHandler}>
               Log Out
             </div>
           </>

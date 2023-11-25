@@ -8,9 +8,12 @@ const name_ = {
   TITLE_: "TheTitle",
   DESCRIPTION_: "TheDescription",
   ARRAY_OF_DB: "ContentOfArray",
+  FILE_: "MyFiles",
+  PIC_: "Pictures",
 };
 
-const { IS_AUTH, CONTENTS_, TITLE_, DESCRIPTION_, ARRAY_OF_DB } = name_;
+const { IS_AUTH, CONTENTS_, TITLE_, DESCRIPTION_, ARRAY_OF_DB, FILE_, PIC_ } =
+  name_;
 
 const App_context = createContext();
 const reducer = (state, action) => {
@@ -30,6 +33,12 @@ const reducer = (state, action) => {
     case ARRAY_OF_DB:
       state.ArrayDB = action.payload;
       return;
+    case FILE_:
+      state.File = action.payload;
+      return;
+    case PIC_:
+      state.Pic = action.payload;
+      return;
     default:
       throw new Error("Unexpected behavior happen: ", action.type);
   }
@@ -41,6 +50,8 @@ const Provider = ({ children }) => {
     Description: "",
     Content: "",
     ArrayDB: [],
+    File: null,
+    Pic: "",
   });
   const name = name_;
 

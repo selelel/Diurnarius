@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateBlog from "./pages/createBlogPage";
-import Home from "./pages/homePage";
+import Blog from "./pages/blogPage";
 import Profile from "./components/profile";
 import LogIn from "./pages/loginPage";
 import Nav from "./components/navigation";
@@ -11,8 +11,8 @@ function App() {
     <Router>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Home />} />
+        <Route path="/" element={<Blog />} /> {/* create new hero page.*/}
+        <Route path="/blog" element={<Blog />} />
         <Route path="/:id" element={<ArticleIndi />} />
         <Route path="/create" element={<CreateBlog />} />
         <Route path="/profile" element={<Profile />} />
