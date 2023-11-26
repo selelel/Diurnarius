@@ -8,7 +8,7 @@ import ArticlePanel from "../components/articlePanel";
 import Profile from "../components/profile";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Blog() {
   const blogCollection = collection(db, "contents");
   const { dispatch, name, state } = Context();
   const { ARRAY_OF_DB } = name;
@@ -27,14 +27,15 @@ function Home() {
   }, []);
 
   return (
-    <div className="grid grid-cols-7 mt-5 gap-2">
+    <div className="grid grid-cols-8 mt-5 gap-2">
       {/*First Section*/}
-      <div className="col-span-5">
+
+      <div className="col-span-6">
         <h1 className="text-2xl font-semibold">Blogs</h1>
         {state.ArrayDB.map((e, i) => {
           return (
             <Fragment key={e.id}>
-              <Link to={`/${i}`}>
+              <Link to={`/blog/${i}`}>
                 <ArticlePanel title={e.title} desc={e.desc} />
               </Link>
             </Fragment>
@@ -49,12 +50,4 @@ function Home() {
   );
 }
 
-export default Home;
-
-/* {state.ArrayDB.map((e) => {
-        return (
-          <Fragment key={e.id}>
-            <h1>{e.title}</h1>
-          </Fragment>
-        );
-      })} */
+export default Blog;

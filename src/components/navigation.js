@@ -20,10 +20,12 @@ function Nav() {
     });
   };
   return (
-    <nav className="flex justify-between text-2xl items-baseline ">
+    <nav className="flex justify-between items-baseline ">
       <h1 className="font-bold text-5xl font-sans">Diurnarius</h1>
-      <div className="flex gap-5 text-lg    h-fit">
+      <div className="flex gap-5 h-fit">
         <Link to={"/"}>Blogs</Link>
+        <Link to={"/about"}>About</Link>
+        <Link to={"/contact"}>Contact</Link>
         {state.isAuth ? (
           <>
             <Link to={"/create"}>CreateBlog</Link>
