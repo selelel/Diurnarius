@@ -16,7 +16,7 @@ function Nav() {
         type: IS_AUTH,
         payload: false,
       });
-      navigate("/login");
+      navigate("/");
     });
   };
   return (
@@ -32,7 +32,7 @@ function Nav() {
             </div>
           </>
         ) : (
-          <Link to={"/login"}>LogIn</Link>
+          ""
         )}
       </div>
     </nav>

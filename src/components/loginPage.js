@@ -20,7 +20,12 @@ function LogIn() {
   };
   return (
     <div>
-      <button onClick={sign_in_with_Google}>Login using google</button>
+      <button
+        className="border border-black px-1 rounded"
+        onClick={sign_in_with_Google}
+      >
+        Login using Google
+      </button>
     </div>
   );
 }

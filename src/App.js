@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateBlog from "./pages/createBlogPage";
 import Blog from "./pages/blogPage";
 import Profile from "./components/profile";
-import LogIn from "./pages/loginPage";
+import LogIn from "./components/loginPage";
 import Nav from "./components/navigation";
 import ArticleIndi from "./pages/individualArticle";
 
@@ -16,7 +16,6 @@ function App() {
         <Route path="/:id" element={<ArticleIndi />} />
         <Route path="/create" element={<CreateBlog />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<LogIn />} />
       </Routes>
     </Router>
   );

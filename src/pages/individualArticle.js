@@ -30,15 +30,19 @@ function ArticleIndi() {
   console.log(cover_url);
 
   return (
-    <>
-      <img src={cover_url[id]} alt="cover" />
+    <div className="mt-5">
+      <img
+        className="object-none object-top w-full h-[20rem] overflow-hidden"
+        src={cover_url[id]}
+        alt="cover"
+      />
       <p className="text-xs my-1">
         {time[id]} | @{name_of_the_creator[id]}
       </p>
       <h1 className="text-4xl font-semibold">{title[id]}</h1>
-      <h1 className="text-sm font-thin">{description[id]}</h1>
+      <h1 className="text-sm font-thin text-justify">{description[id]}</h1>
       <h1 className="text-justify mt-5">{content[id]}</h1>
-    </>
+    </div>
   );
 }
 

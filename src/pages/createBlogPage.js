@@ -69,54 +69,59 @@ function CreateBlog() {
     if (!state.isAuth) {
       navigate("/login");
     }
-  }, [pictureCover]);
+  }, []);
 
   return (
-    <div>
-      <div>
-        <h1>Create a Post</h1>
-        <div>
-          <label>
-            Title:
+    <div className="flex flex-col items-center mt-3">
+      <h1 className="text-2xl font-semibold">Create a Post</h1>
+      <div className="flex flex-col items-center gap-1 text-xl w-1/2">
+        <div className="w-full">
+          <label className="flex flex-col">
+            <h1>Image Cover</h1>
             <input onChange={File} type="file" required />
           </label>
         </div>
 
-        <div>
+        <div className="w-full">
           <label>
             Title:
             <input
+              className="w-full border border-slate-900 p-1 rounded"
               onChange={TitleHandler}
               type="text"
-              placeholder="Title"
               required
             />
           </label>
         </div>
 
-        <div>
+        <div className="w-full">
           <label>
             Description:
             <input
+              className="w-full border border-slate-900 p-1 rounded"
               onChange={DescHandler}
               type="text"
-              placeholder="Description"
               required
             />
           </label>
         </div>
 
-        <div>
+        <div className="w-full">
           <label>
             Content:
             <textarea
+              className="w-full border border-slate-900 p-1 h-[15rem] rounded resize-none"
               onChange={ContentHandler}
-              placeholder="Blog Content"
               required
             />
           </label>
         </div>
-        <button onClick={createBlog}>Post</button>
+        <button
+          className="bg-black px-1 rounded text-white"
+          onClick={createBlog}
+        >
+          Post
+        </button>
       </div>
     </div>
   );
