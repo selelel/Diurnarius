@@ -16,7 +16,7 @@ function ArticleIndi() {
   });
 
   const name_of_the_creator = state.ArrayDB.map((e) => {
-    return e.author.name;
+    return e.author?.name;
   });
 
   const time = state.ArrayDB.map((e) => {
@@ -24,13 +24,14 @@ function ArticleIndi() {
   });
 
   const cover_url = state.ArrayDB.map((e) => {
-    return e.pic;
+    return e.pic?.replaceAll('"', "");
   });
+
+  console.log(cover_url);
 
   return (
     <>
-      <img src={cover_url} alt="cover" />
-      {cover_url}
+      <img src={cover_url[id]} alt="cover" />
       <p className="text-xs my-1">
         {time[id]} | @{name_of_the_creator[id]}
       </p>

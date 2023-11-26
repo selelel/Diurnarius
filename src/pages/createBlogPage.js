@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Context } from "../utils/context";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../utils/firebase-utils";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
@@ -12,21 +12,13 @@ function CreateBlog() {
   const { state, dispatch, name } = Context();
   const { CONTENTS_, TITLE_, DESCRIPTION_, FILE_, PIC_ } = name;
   const blogCollection = collection(db, "contents");
-
   const globalRef = ref(storage, `cover/`);
-  console.log(pictureCover);
-  listAll(globalRef).then((response) => {
-    getDownloadURL(response.items.at(-1)).then((url) => {
-      setCover(url);
-    });
-  });
 
   const createBlog = async () => {
-    await addDoc(blogCollection, {
+    const blogData = {
       title: state.Title,
       desc: state.Description,
       content: state.Content,
-      pic: pictureCover,
       posted: new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         year: "numeric",
@@ -37,10 +29,20 @@ function CreateBlog() {
         name: auth.currentUser.displayName,
         id: auth.currentUser.uid,
       },
-    });
+    };
 
-    const imageRef = ref(storage, `cover/${state.File + v4()}`);
-    uploadBytes(imageRef, state.File);
+    const docRef = await addDoc(blogCollection, blogData);
+
+    const imageRef = ref(storage, `cover/${state.ArrayDB.length}`);
+    await uploadBytes(imageRef, state.File);
+
+    // Get the download URL of the uploaded image
+    const downloadURL = await getDownloadURL(imageRef);
+
+    // Update the blog data in Firestore with the image URL
+    await setDoc(docRef, { pic: downloadURL }, { merge: true });
+
+    // Navigate to the home page
     navigate("/");
   };
 
@@ -67,7 +69,7 @@ function CreateBlog() {
     if (!state.isAuth) {
       navigate("/login");
     }
-  }, []);
+  }, [pictureCover]);
 
   return (
     <div>
