@@ -7,7 +7,7 @@ import LogIn from "./loginPage";
 function Profile() {
   const { state } = Context();
   return (
-    <Panel>
+    <Panel className="border-none">
       {state.isAuth ? (
         <div className="flex flex-col justify-center items-center gap-1">
           <img
@@ -20,11 +20,11 @@ function Profile() {
       ) : (
         <div className="flex flex-col justify-center items-center gap-1">
           <img
-            className="rounded-full w-32"
-            src="https://www.acsh.org/sites/default/files/styles/article-content/public/images/shutterstock_134513474.jpg?itok=HboTVgd6"
+            className="rounded-full w-1/2"
+            src="https://media.tenor.com/o3SXzAksOokAAAAC/anime-meme.gif"
             alt="profile"
           />
-          <h1 className="font-bold text-xs">Panda</h1>
+          <h1 className="font-bold text-xs">unknown</h1>
           <LogIn />
         </div>
       )}

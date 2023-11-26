@@ -3,6 +3,7 @@ import { auth, provider } from "../utils/firebase-utils";
 import { signInWithPopup } from "firebase/auth";
 import { Context } from "../utils/context";
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
 
 function LogIn() {
   const navigate = useNavigate();
@@ -20,12 +21,13 @@ function LogIn() {
   };
   return (
     <div>
-      <button
-        className="border border-black px-1 rounded"
+      <div
+        className="border border-black px-1 rounded flex items-center gap-1 cursor-pointer active:scale-[.98]"
         onClick={sign_in_with_Google}
       >
-        Login using Google
-      </button>
+        <FaGoogle className="text-lg" />
+        <h1>Login</h1>
+      </div>
     </div>
   );
 }
