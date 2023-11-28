@@ -27,7 +27,7 @@ function ArticleIndi() {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-20">
       <div className="w-full h-[15rem] overflow-hidden">
         <img
           className="object-cover object-center h-full w-full"
@@ -40,7 +40,7 @@ function ArticleIndi() {
         {currentArticle.posted} | @{currentArticle.author?.name}
       </p>
 
-      <div className="flex-col flex gap-3 text-justify">
+      <div className="flex-col flex gap-3">
         <h1 className="text-4xl font-bold">{currentArticle.title}</h1>
         <h1 className="text-sm font-thin text-justify">
           {currentArticle.desc}

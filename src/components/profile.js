@@ -25,9 +25,10 @@ function Profile() {
           <img
             className="rounded-full w-1/2"
             src="https://media.tenor.com/o3SXzAksOokAAAAC/anime-meme.gif"
-            alt="profile"
+            alt="random_anime_girl_vibing"
           />
-          <h1 className="font-bold text-xs">Master_Wicked_Lord</h1>
+          <h1 className="font-bold text-xs">random_anime_girl_vibing</h1>
+          <h1 className="text-[0.60rem]">🔽 contribute by logging in 🔽</h1>
           <LogIn />
         </div>
       )}

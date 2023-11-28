@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Context } from "../utils/context";
 import { addDoc, collection, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../utils/firebase-utils";
 import { useNavigate } from "react-router-dom";
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function CreateBlog() {
   const navigate = useNavigate();
   const { state, dispatch, name } = Context();
-  const { CONTENTS_, TITLE_, DESCRIPTION_, FILE_, PIC_ } = name;
-  const blogCollection = collection(db, "contents");
+  const { CONTENTS_, TITLE_, DESCRIPTION_, FILE_ } = name;
+  const creatorOnly = collection(db, "contents");
+  const publicData = collection(db, "public");
 
   const createBlog = async () => {
     const blogData = {
       title: state.Title,
       desc: state.Description,
       content: state.Content,
+      order: state.ArrayDB.length + 1,
       posted: new Intl.DateTimeFormat("en-US", {
         weekday: "long",
         year: "numeric",
@@ -28,17 +29,31 @@ function CreateBlog() {
         id: auth.currentUser.uid,
       },
     };
+    const user = auth.currentUser.email;
+    const validEmails = [
+      "janrusselgorembalem2@gmail.com",
+      "janrusselgorembalem3@gmail.com",
+      "janrusselgorembalem4@gmail.com",
+    ];
 
-    const docRef = await addDoc(blogCollection, blogData);
+    const dataCollect = () => {
+      validEmails.forEach((e) => {
+        if (user === e) {
+          console.log(e);
+          return creatorOnly;
+        }
+      });
+      return publicData;
+    };
+
+    const docRef = await addDoc(dataCollect(), blogData);
 
     const imageRef = ref(storage, `cover/${state.ArrayDB.length}`);
     await uploadBytes(imageRef, state.File);
 
     const downloadURL = await getDownloadURL(imageRef);
 
-
     await setDoc(docRef, { pic: downloadURL }, { merge: true });
-
 
     navigate("/");
   };
@@ -69,7 +84,7 @@ function CreateBlog() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center mt-3">
+    <div className="flex flex-col items-center mt-20">
       <h1 className="text-2xl font-semibold">Create a Post</h1>
       <div className="flex flex-col items-center gap-1 text-xl w-fit">
         <div className="w-full">

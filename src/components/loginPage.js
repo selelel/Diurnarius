@@ -25,7 +25,7 @@ function LogIn() {
         className="border border-black px-1 rounded flex items-center gap-1 cursor-pointer active:scale-[.98]"
         onClick={sign_in_with_Google}
       >
-        <FaGoogle className="text-lg" />
+        <FaGoogle className="text-sm" />
         <h1>Login</h1>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="flex flex-col gap-4 text-justify mt-5 ">
+    <div className="flex flex-col gap-4 text-justify mt-20 ">
       <h1 className="text-3xl font-bold text-center">About My Blog App</h1>
       <h1 className="text-2xl text-center mt-2">
         Welcome to my personal blog app!

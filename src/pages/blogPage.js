@@ -9,26 +9,41 @@ import { Link } from "react-router-dom";
 import Time from "../components/clock";
 
 function Blog() {
-  const blogCollection = collection(db, "contents");
+  const creatorBlog = collection(db, "contents");
+  const publicData = collection(db, "public");
   const { dispatch, name, state } = Context();
   const { ARRAY_OF_DB } = name;
 
   useEffect(() => {
     const getPost = async () => {
-      const data = await getDocs(blogCollection);
+      const dbCreator = await getDocs(creatorBlog);
+      const dbPublic = await getDocs(publicData);
+
+      const creatorsDatas = dbCreator.docs.map((docs) => {
+        return { ...docs.data(), id: docs.id };
+      });
+      const publicDatas = dbPublic.docs.map((docs) => {
+        return { ...docs.data(), id: docs.id };
+      });
+
+      const mergedData = [...creatorsDatas, ...publicDatas];
+      const sortedData = mergedData.sort((a, b) => {
+        return b.order - a.order;
+      });
 
       dispatch({
         type: ARRAY_OF_DB,
-        payload: data.docs.map((docs) => {
-          return { ...docs.data(), id: docs.id };
-        }),
+        payload: sortedData,
       });
     };
     getPost();
   }, []);
 
   return (
-    <div className="grid md:grid-cols-8 mt-5 gap-2">
+    <div
+      className="grid w-fit md:grid-cols-8 mt-20 gap-2 overflow-x-hidden 
+    "
+    >
       {/*First Section*/}
 
       <div className="md:col-span-6 flex flex-col gap-3">
@@ -44,6 +59,7 @@ function Blog() {
                     desc={e.desc}
                     idBlog={e.id}
                     authorID={e.author.id}
+                    author={e.author.name}
                   />
                 </Link>
               </Fragment>
