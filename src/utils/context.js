@@ -16,33 +16,28 @@ const { IS_AUTH, CONTENTS_, TITLE_, DESCRIPTION_, ARRAY_OF_DB, FILE_, PIC_ } =
   name_;
 
 const App_context = createContext();
+
 const reducer = (state, action) => {
   switch (action.type) {
     case IS_AUTH:
-      state.isAuth = action.payload;
-      return;
+      return { ...state, isAuth: action.payload };
     case CONTENTS_:
-      state.Content = action.payload;
-      return;
+      return { ...state, Content: action.payload };
     case TITLE_:
-      state.Title = action.payload;
-      return;
+      return { ...state, Title: action.payload };
     case DESCRIPTION_:
-      state.Description = action.payload;
-      return;
+      return { ...state, Description: action.payload };
     case ARRAY_OF_DB:
-      state.ArrayDB = action.payload;
-      return;
+      return { ...state, ArrayDB: action.payload };
     case FILE_:
-      state.File = action.payload;
-      return;
+      return { ...state, File: action.payload };
     case PIC_:
-      state.Pic = action.payload;
-      return;
+      return { ...state, Pic: action.payload };
     default:
       throw new Error("Unexpected behavior happen: ", action.type);
   }
 };
+
 const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(produce(reducer), {
     isAuth: false,
@@ -53,6 +48,7 @@ const Provider = ({ children }) => {
     File: null,
     Pic: "",
   });
+
   const name = name_;
 
   return (
@@ -63,7 +59,11 @@ const Provider = ({ children }) => {
 };
 
 const Context = () => {
-  return useContext(App_context);
+  const contextValue = useContext(App_context);
+  if (!contextValue) {
+    throw new Error("Context must be used within a Provider");
+  }
+  return contextValue;
 };
 
 export { Provider, Context };

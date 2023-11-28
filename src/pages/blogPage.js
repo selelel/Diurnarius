@@ -53,7 +53,7 @@ function Blog() {
       </div>
 
       {/*Second Section*/}
-      <div className="md:col-span-2 mx-auto">
+      <div className="md:col-span-2 row-start-1 md:row-start-auto  mx-auto">
         <Profile />
       </div>
     </div>

@@ -13,11 +13,24 @@ function ArticleIndi() {
     return <div>Article not found</div>;
   }
 
+  const components = {
+    // eslint-disable-next-line jsx-a11y/heading-has-content
+    h1: ({ node, ...props }) => (
+      <h1 style={{ fontSize: "1.5rem" }} {...props} />
+    ),
+    h2: ({ node, ...props }) => (
+      <h2 style={{ fontSize: "1.3rem", fontWeight: "10" }} {...props} />
+    ),
+    h3: ({ node, ...props }) => (
+      <span style={{ textAlign: "right" }} {...props} />
+    ),
+  };
+
   return (
     <div className="mt-5">
       <div className="w-full h-[15rem] overflow-hidden">
         <img
-          className=" object-none object-center h-full w-full"
+          className="object-cover object-center h-full w-full"
           src={currentArticle.pic?.replaceAll('"', "")}
           alt="cover"
         />
@@ -27,20 +40,13 @@ function ArticleIndi() {
         {currentArticle.posted} | @{currentArticle.author?.name}
       </p>
 
-      <div className="flex-col flex gap-3">
+      <div className="flex-col flex gap-3 text-justify">
         <h1 className="text-4xl font-bold">{currentArticle.title}</h1>
         <h1 className="text-sm font-thin text-justify">
           {currentArticle.desc}
         </h1>
         <div className="text-justify mt-5" />
-        <ReactMarkdown
-          components={{
-            // eslint-disable-next-line jsx-a11y/heading-has-content
-            h1: ({ node, ...props }) => (
-              <h1 style={{ fontSize: "1.5rem" }} {...props} />
-            ),
-          }}
-        >
+        <ReactMarkdown components={components}>
           {currentArticle.content}
         </ReactMarkdown>
       </div>
