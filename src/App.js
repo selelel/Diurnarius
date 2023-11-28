@@ -13,12 +13,13 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Blog />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:id" element={<ArticleIndi />} />
-        <Route path="/create" element={<CreateBlog />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/diurnarius/" element={<Blog />} />
+        <Route path="/diurnarius/blog" element={<Blog />} />
+        <Route path="/diurnarius/blog/:id" element={<ArticleIndi />} />
+        <Route path="/diurnarius/create" element={<CreateBlog />} />
+        <Route path="/diurnarius/profile" element={<Profile />} />
+        <Route path="/diurnarius/about" element={<About />} />
+        <Route path="/diurnarius/contact" element={<Contact />} />
       </Routes>
     </Router>
   );

@@ -15,7 +15,10 @@ function Profile() {
             src={auth.currentUser.photoURL}
             alt="profile"
           />
-          <h1 className="font-bold text-xs">{auth.currentUser.displayName}</h1>
+          <h1 className="font-bold text-xs">
+            @{auth.currentUser.displayName.replaceAll(" ", "_")}
+          </h1>
+          <h1 className="font-bold text-[.5rem]">{auth.currentUser.email}</h1>
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center gap-1">
@@ -24,7 +27,7 @@ function Profile() {
             src="https://media.tenor.com/o3SXzAksOokAAAAC/anime-meme.gif"
             alt="profile"
           />
-          <h1 className="font-bold text-xs">unknown</h1>
+          <h1 className="font-bold text-xs">Master_Wicked_Lord</h1>
           <LogIn />
         </div>
       )}

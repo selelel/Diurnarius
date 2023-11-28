@@ -7,12 +7,10 @@ import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
 function CreateBlog() {
-  const [pictureCover, setCover] = useState("");
   const navigate = useNavigate();
   const { state, dispatch, name } = Context();
   const { CONTENTS_, TITLE_, DESCRIPTION_, FILE_, PIC_ } = name;
   const blogCollection = collection(db, "contents");
-  const globalRef = ref(storage, `cover/`);
 
   const createBlog = async () => {
     const blogData = {
@@ -36,13 +34,12 @@ function CreateBlog() {
     const imageRef = ref(storage, `cover/${state.ArrayDB.length}`);
     await uploadBytes(imageRef, state.File);
 
-    // Get the download URL of the uploaded image
     const downloadURL = await getDownloadURL(imageRef);
 
-    // Update the blog data in Firestore with the image URL
+
     await setDoc(docRef, { pic: downloadURL }, { merge: true });
 
-    // Navigate to the home page
+
     navigate("/");
   };
 
@@ -74,7 +71,7 @@ function CreateBlog() {
   return (
     <div className="flex flex-col items-center mt-3">
       <h1 className="text-2xl font-semibold">Create a Post</h1>
-      <div className="flex flex-col items-center gap-1 text-xl w-1/2">
+      <div className="flex flex-col items-center gap-1 text-xl w-fit">
         <div className="w-full">
           <label className="flex flex-col">
             <h1>Image Cover</h1>

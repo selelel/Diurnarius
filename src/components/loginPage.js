@@ -16,7 +16,7 @@ function LogIn() {
         type: IS_AUTH,
         payload: true,
       });
-      navigate("/");
+      navigate("/diurnarius");
     });
   };
   return (

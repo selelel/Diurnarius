@@ -1,4 +1,5 @@
 {
+  "homepage": "https://selelel.github.io/diurnarius",
   "name": "diurnarius",
   "version": "0.1.0",
   "private": true,
@@ -9,15 +10,22 @@
     "classnames": "^2.3.2",
     "firebase": "^10.6.0",
     "immer": "^10.0.3",
+    "markdown-it": "^13.0.2",
+    "markdown-to-jsx": "^7.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.1.0",
     "tailwindcss": "^3.3.5"
   }
 }

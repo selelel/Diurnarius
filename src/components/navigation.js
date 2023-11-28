@@ -22,25 +22,37 @@ function Nav() {
 
   const isActive = (path) => {
     if (window.location.pathname === path) {
-      return "font-semibold";
+      return "font-semibold drop-shadow-lg duration-100 ease-linear";
     }
+    return "";
   };
   return (
     <nav className="flex justify-between items-baseline ">
       <h1 className="font-bold text-5xl font-sans">Diurnarius</h1>
-      <div className="flex gap-5 h-fit">
-        <Link className={isActive("/")} to={"/"}>
+      <div className="flex gap-5 h-fit items-baseline ">
+        <Link className={isActive("/diurnarius")} to={"/diurnarius"}>
           Home
         </Link>
-        <Link className={isActive("/about")} to={"/about"}>
+        <Link
+          className={isActive("/diurnarius/about")}
+          to={"/diurnarius/about"}
+        >
           About
         </Link>
-        <Link className={isActive("/contact")} to={"/contact"}>
+        <Link
+          className={isActive("/diurnarius/contact")}
+          to={"/diurnarius/contact"}
+        >
           Contact
         </Link>
         {state.isAuth ? (
           <>
-            <Link to={"/create"}>CreateBlog</Link>
+            <Link
+              className={isActive("/diurnarius/create")}
+              to={"/diurnarius/create"}
+            >
+              CreateBlog
+            </Link>
             <div className="cursor-pointer" onClick={clickHandler}>
               Log Out
             </div>
