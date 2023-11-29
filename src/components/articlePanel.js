@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Panel from "./panel";
 import { deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../utils/firebase-utils";
@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 function ArticlePanel({ title, desc, idBlog, authorID, author }) {
   const { state } = Context();
   const navigate = useNavigate();
+
   const deleteBlog = async (id) => {
-    navigate("/diurnarius");
+    console.log(id);
     const user = auth.currentUser.email;
     const validEmails = [
       "janrusselgorembalem2@gmail.com",
@@ -18,34 +19,44 @@ function ArticlePanel({ title, desc, idBlog, authorID, author }) {
     ];
 
     const dataCollect = () => {
-      validEmails.forEach((e) => {
-        if (user === e) {
-          console.log(e);
-          return "contents";
-        }
-      });
+      if (validEmails.find((use) => user === use)) {
+        return "contents";
+      }
       return "public";
     };
 
-    const document = doc(db, dataCollect(), id);
+    const result = dataCollect();
+
+    const document = doc(db, result, id);
     await deleteDoc(document);
+
+    navigate("/diurnarius");
   };
 
-  return (
-    <Panel className="cursor-pointer relative -z-10">
-      {state?.isAuth && authorID === auth.currentUser?.uid && (
+  const buttonDelete = () => {
+    return (
+      state?.isAuth &&
+      authorID === auth.currentUser?.uid && (
         <button
-          className="text-xs absolute right-3 top-3"
+          className="text-xs text-red-400"
           onClick={() => {
             deleteBlog(idBlog);
           }}
         >
           Delete
         </button>
-      )}
-      <h1 className="text-xl font-bold line-clamp-2 ">{title}</h1>
-      <p className="text-xs line-clamp-2">{desc}</p>
-    </Panel>
+      )
+    );
+  };
+
+  return (
+    <>
+      <div className="justify-end flex">{buttonDelete()}</div>
+      <Panel className="cursor-pointer relative -z-10">
+        <h1 className="text-xl font-bold line-clamp-2 ">{title}</h1>
+        <p className="text-xs line-clamp-2">{desc}</p>
+      </Panel>
+    </>
   );
 }
 

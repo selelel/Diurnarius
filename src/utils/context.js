@@ -10,10 +10,19 @@ const name_ = {
   ARRAY_OF_DB: "ContentOfArray",
   FILE_: "MyFiles",
   PIC_: "Pictures",
+  COUNT_DATE: "CountDate",
 };
 
-const { IS_AUTH, CONTENTS_, TITLE_, DESCRIPTION_, ARRAY_OF_DB, FILE_, PIC_ } =
-  name_;
+const {
+  IS_AUTH,
+  CONTENTS_,
+  TITLE_,
+  DESCRIPTION_,
+  ARRAY_OF_DB,
+  FILE_,
+  PIC_,
+  COUNT_DATE,
+} = name_;
 
 const App_context = createContext();
 
@@ -33,6 +42,8 @@ const reducer = (state, action) => {
       return { ...state, File: action.payload };
     case PIC_:
       return { ...state, Pic: action.payload };
+    case COUNT_DATE:
+      return { ...state, CountDate: action.payload };
     default:
       throw new Error("Unexpected behavior happen: ", action.type);
   }
@@ -47,6 +58,9 @@ const Provider = ({ children }) => {
     ArrayDB: [],
     File: null,
     Pic: "",
+    CountDate: Math.floor(
+      (new Date() - new Date("2023-08-29")) / (1000 * 60 * 60 * 24)
+    ),
   });
 
   const name = name_;

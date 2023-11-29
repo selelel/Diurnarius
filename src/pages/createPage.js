@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Context } from "../utils/context";
-import { addDoc, collection, setDoc } from "firebase/firestore";
+import { addDoc, collection, count, setDoc } from "firebase/firestore";
 import { auth, db, storage } from "../utils/firebase-utils";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -9,8 +9,6 @@ function CreateBlog() {
   const navigate = useNavigate();
   const { state, dispatch, name } = Context();
   const { CONTENTS_, TITLE_, DESCRIPTION_, FILE_ } = name;
-  const creatorOnly = collection(db, "contents");
-  const publicData = collection(db, "public");
 
   const createBlog = async () => {
     const blogData = {
@@ -24,11 +22,13 @@ function CreateBlog() {
         month: "long",
         day: "numeric",
       }).format(new Date()),
+      countDate: state.CountDate,
       author: {
         name: auth.currentUser.displayName,
         id: auth.currentUser.uid,
       },
     };
+
     const user = auth.currentUser.email;
     const validEmails = [
       "janrusselgorembalem2@gmail.com",
@@ -37,14 +37,12 @@ function CreateBlog() {
     ];
 
     const dataCollect = () => {
-      validEmails.forEach((e) => {
-        if (user === e) {
-          console.log(e);
-          return creatorOnly;
-        }
-      });
-      return publicData;
+      if (validEmails.find((use) => user === use)) {
+        return collection(db, "contents");
+      }
+      return collection(db, "public");
     };
+    console.log(dataCollect());
 
     const docRef = await addDoc(dataCollect(), blogData);
 
@@ -84,9 +82,9 @@ function CreateBlog() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center mt-20">
+    <div className="flex flex-col items-center gap-5 mt-20">
       <h1 className="text-2xl font-semibold">Create a Post</h1>
-      <div className="flex flex-col items-center gap-1 text-xl w-fit">
+      <div className="flex flex-col items-center gap-5 text-xl w-full ">
         <div className="w-full">
           <label className="flex flex-col">
             <h1>Image Cover</h1>

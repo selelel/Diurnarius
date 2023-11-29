@@ -4,7 +4,7 @@ import classNames from "classnames";
 function Panel({ children, ...rest }) {
   const args = classNames(
     rest.className,
-    "duration-100 ease-out overflow-hidden p-4 my-2 border border-black rounded-sm"
+    "duration-100 ease-out overflow-hidden p-4 my-1 border border-black rounded-sm"
   );
 
   return (
