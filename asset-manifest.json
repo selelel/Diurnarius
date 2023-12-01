@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/diurnarius/static/css/main.7269898e.css",
-    "main.js": "/diurnarius/static/js/main.dac0be16.js",
+    "main.js": "/diurnarius/static/js/main.a9dffce3.js",
     "index.html": "/diurnarius/index.html",
     "main.7269898e.css.map": "/diurnarius/static/css/main.7269898e.css.map",
-    "main.dac0be16.js.map": "/diurnarius/static/js/main.dac0be16.js.map"
+    "main.a9dffce3.js.map": "/diurnarius/static/js/main.a9dffce3.js.map"
   },
   "entrypoints": [
     "static/css/main.7269898e.css",
-    "static/js/main.dac0be16.js"
+    "static/js/main.a9dffce3.js"
   ]
 }
