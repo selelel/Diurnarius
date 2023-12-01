@@ -2,7 +2,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../utils/context";
-import ReactMarkdown from "react-markdown";
+import { sanitize } from "dompurify";
+import "../markdown.css";
 
 function ArticleIndi() {
   const { id } = useParams();
@@ -26,6 +27,8 @@ function ArticleIndi() {
     ),
   };
 
+  console.log(currentArticle.content);
+
   return (
     <div className="mt-20">
       <div className="w-full h-[15rem] overflow-hidden">
@@ -46,9 +49,10 @@ function ArticleIndi() {
           {currentArticle.desc}
         </h1>
         <div className="text-justify mt-5" />
-        <ReactMarkdown components={components}>
-          {currentArticle.content}
-        </ReactMarkdown>
+        <div
+          className="myComponent"
+          dangerouslySetInnerHTML={{ __html: sanitize(currentArticle.content) }}
+        />
       </div>
     </div>
   );
